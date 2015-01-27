@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual C# Express 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ibt.Ortc.Api", "Ibt.Ortc.Api\Ibt.Ortc.Api.csproj", "{3DA6DE9C-E3E2-4806-BF3F-E96F0F2D42DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ibt.Ortc.Api.Extensibility", "Ibt.Ortc.Api\Extensibility\Ibt.Ortc.Api.Extensibility.csproj", "{C6CFC359-B936-4E6E-BC8B-29311439A19C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ibt.Ortc.Plugin.IbtRealTimeSJ", "Ibt.Ortc.Api\Plugin\Ibt.Ortc.Plugin.IbtRealTimeSJ\Ibt.Ortc.Plugin.IbtRealTimeSJ.csproj", "{479F0D43-7874-4DEB-907C-1B224C94A89B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3DA6DE9C-E3E2-4806-BF3F-E96F0F2D42DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA6DE9C-E3E2-4806-BF3F-E96F0F2D42DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA6DE9C-E3E2-4806-BF3F-E96F0F2D42DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA6DE9C-E3E2-4806-BF3F-E96F0F2D42DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6CFC359-B936-4E6E-BC8B-29311439A19C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6CFC359-B936-4E6E-BC8B-29311439A19C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6CFC359-B936-4E6E-BC8B-29311439A19C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6CFC359-B936-4E6E-BC8B-29311439A19C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{479F0D43-7874-4DEB-907C-1B224C94A89B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{479F0D43-7874-4DEB-907C-1B224C94A89B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{479F0D43-7874-4DEB-907C-1B224C94A89B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{479F0D43-7874-4DEB-907C-1B224C94A89B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
