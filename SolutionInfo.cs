@@ -6,9 +6,9 @@ using System.Runtime.InteropServices;
 // associated with an assembly.
 
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("IBT")]
-[assembly: AssemblyProduct("Open Real Time Connectivity Application Programming Interface.")]
-[assembly: AssemblyCopyright("Copyright © IBT 2011 - 2013")]
+[assembly: AssemblyCompany("Realtime.co")]
+[assembly: AssemblyProduct("Realtime Messaging .NET SDK")]
+[assembly: AssemblyCopyright("Copyright © Realtime.co 2011 - 2016")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // by using the '*' as shown below:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("2.1.18")]
-[assembly: AssemblyFileVersion("2.1.18")]
+[assembly: AssemblyVersion("2.1.20")]
+[assembly: AssemblyFileVersion("2.1.20")]
