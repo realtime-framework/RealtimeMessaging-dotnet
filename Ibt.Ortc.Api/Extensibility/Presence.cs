@@ -128,25 +128,32 @@ namespace Ibt.Ortc.Api.Extensibility
         {
             Balancer.GetServerUrl(url, isCluster, applicationKey, (error, server) =>
             {
-                var presenceUrl = String.IsNullOrEmpty(server) ? server : server[server.Length - 1] == '/' ? server : server + "/";
-                presenceUrl = String.Format("{0}presence/{1}/{2}/{3}", presenceUrl, applicationKey, authenticationToken, channel);
-
-                RestWebservice.GetAsync(presenceUrl, (responseError, result) =>
+                if (error == null)
                 {
-                    if (responseError != null)
+                    var presenceUrl = String.IsNullOrEmpty(server) ? server : server[server.Length - 1] == '/' ? server : server + "/";
+                    presenceUrl = String.Format("{0}presence/{1}/{2}/{3}", presenceUrl, applicationKey, authenticationToken, channel);
+
+                    RestWebservice.GetAsync(presenceUrl, (responseError, result) =>
                     {
-                        callback(responseError, null);
-                    }
-                    else
-                    {
-                        Presence presenceData = new Presence();
-                        if (!String.IsNullOrEmpty(result))
+                        if (responseError != null)
                         {
-                            presenceData = Extensibility.Presence.Deserialize(result);
+                            callback(responseError, null);
                         }
-                        callback(null, presenceData);
-                    }
-                });
+                        else
+                        {
+                            Presence presenceData = new Presence();
+                            if (!String.IsNullOrEmpty(result))
+                            {
+                                presenceData = Extensibility.Presence.Deserialize(result);
+                            }
+                            callback(null, presenceData);
+                        }
+                    });  
+                }
+                else
+                {
+                    callback(new OrtcPresenceException(error.Message), null);
+                }
             });
         }
 
@@ -179,27 +186,36 @@ namespace Ibt.Ortc.Api.Extensibility
         {
             Balancer.GetServerUrl(url, isCluster, applicationKey, (error, server) =>
             {
-                var presenceUrl = String.IsNullOrEmpty(server) ? server : server[server.Length - 1] == '/' ? server : server + "/";
-                presenceUrl = String.Format("{0}presence/enable/{1}/{2}", presenceUrl, applicationKey, channel);
-
-                var content = String.Format("privatekey={0}", privateKey);
-
-                if (metadata)
+                if (error == null)
                 {
-                    content = String.Format("{0}&metadata=1", content);
+                    var presenceUrl = String.IsNullOrEmpty(server)
+                        ? server
+                        : server[server.Length - 1] == '/' ? server : server + "/";
+                    presenceUrl = String.Format("{0}presence/enable/{1}/{2}", presenceUrl, applicationKey, channel);
+
+                    var content = String.Format("privatekey={0}", privateKey);
+
+                    if (metadata)
+                    {
+                        content = String.Format("{0}&metadata=1", content);
+                    }
+
+                    RestWebservice.PostAsync(presenceUrl, content, (responseError, result) =>
+                    {
+                        if (responseError != null)
+                        {
+                            callback(responseError, null);
+                        }
+                        else
+                        {
+                            callback(null, result);
+                        }
+                    });
                 }
-
-                RestWebservice.PostAsync(presenceUrl, content, (responseError, result) =>
+                else
                 {
-                    if (responseError != null)
-                    {
-                        callback(responseError, null);
-                    }
-                    else
-                    {
-                        callback(null, result);
-                    }
-                });
+                    callback(new OrtcPresenceException(error.Message), null);
+                }
             });
         }
 
@@ -216,22 +232,29 @@ namespace Ibt.Ortc.Api.Extensibility
         {
             Balancer.GetServerUrl(url, isCluster, applicationKey, (error, server) =>
             {
-                var presenceUrl = String.IsNullOrEmpty(server) ? server : server[server.Length - 1] == '/' ? server : server + "/";
-                presenceUrl = String.Format("{0}presence/disable/{1}/{2}", presenceUrl, applicationKey, channel);
-
-                var content = String.Format("privatekey={0}", privateKey);
-
-                RestWebservice.PostAsync(presenceUrl, content, (responseError, result) =>
+                if (error == null)
                 {
-                    if (responseError != null)
+                    var presenceUrl = String.IsNullOrEmpty(server) ? server : server[server.Length - 1] == '/' ? server : server + "/";
+                    presenceUrl = String.Format("{0}presence/disable/{1}/{2}", presenceUrl, applicationKey, channel);
+
+                    var content = String.Format("privatekey={0}", privateKey);
+
+                    RestWebservice.PostAsync(presenceUrl, content, (responseError, result) =>
                     {
-                        callback(responseError, null);
-                    }
-                    else
-                    {
-                        callback(null, result);
-                    }
-                });
+                        if (responseError != null)
+                        {
+                            callback(responseError, null);
+                        }
+                        else
+                        {
+                            callback(null, result);
+                        }
+                    });
+                }
+                else
+                {
+                    callback(new OrtcPresenceException(error.Message), null);
+                }
             });
         }
     }

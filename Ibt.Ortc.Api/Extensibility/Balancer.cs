@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Net;
 using System.IO;
+using System.Security.Policy;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -83,6 +84,11 @@ namespace Ibt.Ortc.Api.Extensibility
 
                     server = ParseBalancerResponse(streamReader);
 
+                    if (!IsWellFormedBalancerUrl(server))
+                    {
+                        throw new Exception("Balancer server url is not valid (" + server + ")");
+                    }
+
                     if (onClusterUrlResolved != null)
                     {
                         onClusterUrlResolved(server, null);
@@ -90,11 +96,27 @@ namespace Ibt.Ortc.Api.Extensibility
                 }
                 catch (Exception ex)
                 {
-                    onClusterUrlResolved(server, ex);
+                    if (onClusterUrlResolved != null)
+                    {
+                        onClusterUrlResolved(server, ex);
+                    }
                 }
             }), request);
         }
         // Private Methods (1) 
+
+        private static bool IsWellFormedBalancerUrl(string url)
+        {
+            var valid = false;
+
+            if (Uri.IsWellFormedUriString(url, UriKind.RelativeOrAbsolute))
+            {
+                var uri = new Uri(url);
+                valid = uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps;
+            }
+
+            return valid;
+        }
 
         private static String ParseBalancerResponse(StreamReader response)
         {
